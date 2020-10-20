@@ -35,15 +35,16 @@ def open_vim(self, compile_latex):
             m.close()
 
             working_directory = tempfile.gettempdir()
+            breakpoint()
             subprocess.run(
-                ['pdflatex', m.name],
-                cwd=working_directory,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL
+                ['pdflatex', os.path.basename(m.name)],
+                cwd=working_directory
+#                stdout=subprocess.DEVNULL,
+#                stderr=subprocess.DEVNULL
             )
 
             subprocess.run(
-                ['pdf2svg', f'{m.name}.pdf', f'{m.name}.svg'],
+                ['pdf2svg', f'{os.path.basename(m.name)}.pdf', f'{os.path.basename(m.name)}.svg'],
                 cwd=working_directory
             )
 
